@@ -3,13 +3,13 @@ function World() {
 }
 
 World.prototype.renderEntities = function() {
+	var entityHelper = new EntityHelper
 	var b = new B()
 }
 
 World.prototype.propagateTime = function() {
-	for (var entity in entities) {
-		entity.time()
-		// b.time()
+	for (var entity of entities) {
+		entity.time() // b.time()
 	}
 }
 
