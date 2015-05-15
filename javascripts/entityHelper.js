@@ -1,8 +1,8 @@
-function EntityHelper() {
+function LocationHelper() {
 
 }
 
-EntityHelper.prototype.proximity = function(args) {
+LocationHelper.prototype.proximity = function(args) {
 	var proximity;
 	xDist = this.getDist(args, 'x')
 	yDist = this.getDist(args, 'y')
@@ -18,7 +18,32 @@ EntityHelper.prototype.proximity = function(args) {
 	return proximity;
 }
 
-EntityHelper.prototype.getDist = function(args, axis) {
+LocationHelper.prototype.getDist = function(args, axis) {
 	return Math.abs(args.subject.coords.axis - args.object.coords.axis) -
 									(args.subject.size.axis + args.object.size.axis) / 2;
+}
+
+LocationHelper.prototype.nextCoordsForSmoothRandomMove = function(args) {
+	var newCoords;
+	if (args.coords.prev === undefined) {
+		newCoords = locationBasedNextCoords(args)
+	} else {
+		newCoords = vectorBasedNextCoords(args)
+	}
+	return newCoords
+}
+
+LocationHelper.prototype.locationBasedNextCoords = function(args) {
+	var xNew = args.currentCoords.xNow + (Math.random() * args.percentScreenMove - args.percentScreenMove/2);
+	var yNew = args.currentCoords.yNow + (Math.random() * args.percentScreenMove - args.percentScreenMove/2);
+	return {x: xNew, y: yNew};
+}
+
+LocationHelper.prototype.vectorBasedNextCoords = function(args) {
+	var currentBearing = Math.atan((args.coords.prev.x - args.coords.now.x)/
+													 	(args.coords.prev.y - args.coords.now.y));
+	var newBearing = currentBearing + Math.random() * args.bearingMaxVariation;
+	var xNew = args.percentScreenMove * Math.sin(newBearing);
+	var yNew = args.percentScreenMove * Math.cos(newBearing);
+	return {x: xNew, y: yNew};
 }

@@ -3,7 +3,7 @@ function World() {
 }
 
 World.prototype.renderEntities = function() {
-	var entityHelper = new EntityHelper
+	var LocationHelper = new LocationHelper
 	var b = new B()
 }
 

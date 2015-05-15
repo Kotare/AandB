@@ -21,16 +21,16 @@ function B() {
 
 B.prototype.time = function(world) { // superclass
 	entities = world.sense();
-	this.check(entities) //<< make callback of world.sense
+	this.check(entities) //<< make callback of world.sense() above
 };
 
 B.prototype.check = function(entities) { // superclass
 	for (var entity of entities) {
-		var proximity = entityHelper.proximity({
+		var proximity = LocationHelper.proximity({
 											subject: {coords: this.coords, 		size: this.size},
 											object:  {coords: entity.coords, 	size: entity.size}
 										});
-		this.react(this.class, proximity) //<< make callback of proximity
+		this.react(this.class, proximity) //<< make callback of LocationHelper.proximity() above
 	}
 }
 
