@@ -1,6 +1,6 @@
 function B() {
 	this.size = {x: 30, y: 30}; // superclass
-	this.coords = {x: 30, y: 30}; // superclass
+	this.coords = {x: 30, y: 30}; // (centre?) superclass
 }
 
 B.prototype.time = function(world) { // superclass
@@ -14,7 +14,7 @@ B.prototype.check = function(entities) { // superclass
 											subject: {coords: this.coords, 		size: this.size},
 											object:  {coords: entity.coords, 	size: entity.size}
 										});
-		this.react(this.class, proximity)
+		this.react(this.class, proximity) //<< make callback of proximity
 	}
 }
 
