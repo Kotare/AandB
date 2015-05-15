@@ -1,6 +1,7 @@
-function B() {
-	this.id = 1 // increment on creation?
-	this.class = 'b'
+function B(id) {
+	this.id = id; // increment on creation?
+	this.class = 'b';
+	this.$element = $('<div id="' + this.id + '" class="' + this.class + '"></div>')
 	this.size = {x: 30, y: 30}; // superclass
 	this.coords = {x: 30, y: 30}; // (centre!) superclass
 	this.behaviours = { // toggle?
