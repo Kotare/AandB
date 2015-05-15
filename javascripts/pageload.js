@@ -1,10 +1,9 @@
-$(document).ready(function(){
+$(document).ready(function() {
 	var world = new World();
 	world.renderEntities();
 
-	var time = setInterval(function(){
-		world.updateSurroundsForAllEntities();
-		world.updateEntities();
+	var time = setInterval(function() {
+		world.propagateTime;
 
 		//? world.addEntities
 	}, 500);
