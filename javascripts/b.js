@@ -3,12 +3,13 @@ function B(id) {
 		this.class = 'b';
 		this.$element = $('<div id="' + this.id + '" class="' + this.class + '"></div>')
 		this.diameter = 30; // superclass
+		this.$element.css({width: this.diameter, height: this.diameter});
 		this.path = {
 			currentCoords: {
 				x: 50,
 				y: 50
 			},
-			vector: new Victor(30, 30) //backwards-pointing vector, randomise later
+			vector: new Victor(1, 1) //backwards-pointing vector, randomise later
 		}
 	}
 	// superclass
@@ -40,8 +41,8 @@ B.prototype.time = function(world, timeStep) { // superclass
 
 B.prototype.moveAbout = function(timeStep) {
 	this.path = this.newPath();
-	var newTopLeftCoords = locationHelper.vectorToTopLeftCoords({
-		vector: this.vector,
+	var newTopLeftCoords = locationHelper.coordsToTopLeftCoords({
+		coords: this.path.currentCoords,
 		entitySize: {
 			x: this.diameter,
 			y: this.diameter
@@ -55,7 +56,8 @@ B.prototype.moveAbout = function(timeStep) {
 };
 
 B.prototype.newPath = function() {
-	var newBearing = this.path.vector.verticalAngle() + ((Math.Random() * bearingVariation) - (bearingVariation / 2));
+	var bearingVariation = Math.PI / 6;
+	var newBearing = this.path.vector.verticalAngle() + ((Math.random() * bearingVariation) - (bearingVariation / 2));
 	var vectorXNew = this.path.vector.magnitude() * Math.sin(newBearing);
 	var vectorYNew = this.path.vector.magnitude() * Math.cos(newBearing);
 	var newVector = new Victor(vectorXNew, vectorYNew);

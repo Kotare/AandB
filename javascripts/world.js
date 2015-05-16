@@ -4,14 +4,13 @@ function World() {
 
 World.prototype.generateEntities = function() {
 	var initialEntities = []
-	for (var i = 1; i <= 2; i++) {
+	for (var i = 1; i <= 300; i++) {
 		initialEntities.push(new B(i))
 	}
 	return initialEntities
 }
 
 World.prototype.renderEntities = function() {
-	var this.locationHelper = new LocationHelper();
 	for (var entity of this.entities) {
 		$('#world').append(entity.$element)
 	}

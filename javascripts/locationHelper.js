@@ -3,22 +3,22 @@ function LocationHelper() {
 }
 
 LocationHelper.prototype.proximity = function(args) {
-	var xDist = Math.abs(args.subject.vector.x - args.object.vector.x)
-	var yDist = Math.abs(args.subject.vector.y - args.object.vector.y)
+	var xDist = Math.abs(args.subject.coords.x - args.object.coords.x)
+	var yDist = Math.abs(args.subject.coords.y - args.object.coords.y)
 	var centreDistance = Math.sqrt(xDist*xDist + yDist*yDist);
 	return centreDistance - (args.subject.diameter + args.object.diameter) / 2;
 }
 
-LocationHelper.prototype.vectorToTopLeftCoords = function(args) {
-	var xCoord = args.vector.x - args.entitySize.x/2
-	var yCoord = args.vector.y - args.entitySize.y/2
+LocationHelper.prototype.coordsToTopLeftCoords = function(args) {
+	var xCoord = args.coords.x - args.entitySize.x/2
+	var yCoord = args.coords.y - args.entitySize.y/2
 	return {x: xCoord, y: yCoord}
 }
 
-LocationHelper.prototype.animateTo = function($element, newTopLeftCoords, timeStep) {
-	args.$element.animate({
+LocationHelper.prototype.animateTo = function(args) {
+	args.$element.css({
 		top: args.newTopLeftCoords.y, left: args.newTopLeftCoords.x
-	}, args.timeStep)
+	})
 }
 
 // LocationHelper.prototype.nextVectorForSmoothRandomMove = function(args) {
