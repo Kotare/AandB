@@ -11,15 +11,15 @@ World.prototype.generateEntities = function() {
 }
 
 World.prototype.renderEntities = function() {
-	var LocationHelper = new LocationHelper
+	var this.locationHelper = new LocationHelper();
 	for (var entity of this.entities) {
 		$('#world').append(entity.$element)
 	}
 }
 
-World.prototype.propagateTime = function() {
+World.prototype.propagateTime = function(timeStep) {
 	for (var entity of this.entities) {
-		entity.time() // b.time()
+		entity.time(timeStep) // b.time()
 	}
 }
 
