@@ -2,7 +2,7 @@ function B(id) {
 	this.id = id; // increment on creation?
 	this.class = 'b';
 	this.$element = $('<div id="' + this.id + '" class="' + this.class + '"></div>')
-	this.size = {x: 30, y: 30}; // superclass
+	this.diameter = 30; // superclass
 	this.coords = {x: 30, y: 30}; // (centre!) superclass
 	this.behaviours = { // toggle?
 		default: [ function() {this.moveAbout()}, function() {this.poop()} ],
@@ -28,8 +28,8 @@ B.prototype.time = function(world) { // superclass
 B.prototype.check = function(entities) { // superclass
 	for (var entity of entities) {
 		var proximity = LocationHelper.proximity({
-											subject: {coords: this.coords, 		size: this.size},
-											object:  {coords: entity.coords, 	size: entity.size}
+											subject: {coords: this.coords, 		diameter: this.diameter},
+											object:  {coords: entity.coords, 	diameter: entity.diameter}
 										});
 		this.react(this.class, proximity) //<< make callback of LocationHelper.proximity() above
 	}
@@ -44,6 +44,3 @@ B.prototype.react = function(class, proximity) {
 		}
 	};
 }
-
-
-
