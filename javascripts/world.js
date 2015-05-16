@@ -4,7 +4,7 @@ function World() {
 
 World.prototype.generateEntities = function() {
 	var initialEntities = []
-	for (var i = 1; i <= 300; i++) {
+	for (var i = 1; i <= 100; i++) {
 		initialEntities.push(new B(i))
 	}
 	return initialEntities

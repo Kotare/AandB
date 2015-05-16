@@ -3,14 +3,20 @@ function B(id) {
 		this.class = 'b';
 		this.$element = $('<div id="' + this.id + '" class="' + this.class + '"></div>')
 		this.diameter = 30; // superclass
-		this.$element.css({width: this.diameter, height: this.diameter});
+		this.pathStep = 0.2;
 		this.path = {
 			currentCoords: {
 				x: 50,
 				y: 50
 			},
-			vector: new Victor(1, 1) //backwards-pointing vector, randomise later
+			vector: new Victor(0, -(this.pathStep)) //backwards-pointing vector, randomise later
 		}
+		this.$element.css({
+			width: this.diameter,
+			height: this.diameter,
+			top: this.path.currentCoords.y + '%',
+			left: this.path.currentCoords.x + '%'
+		})
 	}
 	// superclass
 	// this.behaviours = { // toggle?
@@ -35,8 +41,8 @@ B.prototype.time = function(world, timeStep) { // superclass
 	// new coords
 
 	this.moveAbout(timeStep) // Remove into react later!!!!!!!!!!!!!!!!!!!
-	// args = world.sense(entities, objects, ideas, sound);
-	// this.check(entities) //<< make callback of world.sense() above
+		// args = world.sense(entities, objects, ideas, sound);
+		// this.check(entities) //<< make callback of world.sense() above
 };
 
 B.prototype.moveAbout = function(timeStep) {
@@ -64,12 +70,12 @@ B.prototype.newPath = function() {
 	var xNew = this.path.currentCoords.x - newVector.x;
 	var yNew = this.path.currentCoords.y + newVector.y;
 	return {
-			currentCoords: {
-				x: xNew,
-				y: yNew
-			},
-			vector: newVector
-		};
+		currentCoords: {
+			x: xNew,
+			y: yNew
+		},
+		vector: newVector
+	};
 }
 
 
