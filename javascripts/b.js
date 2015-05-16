@@ -8,7 +8,7 @@ function B(id) {
 				x: 50,
 				y: 50
 			},
-			vector: new Victor(30, 30) //backwards-pointing vector
+			vector: new Victor(30, 30) //backwards-pointing vector, randomise later
 		}
 	}
 	// superclass
@@ -39,9 +39,7 @@ B.prototype.time = function(world, timeStep) { // superclass
 };
 
 B.prototype.moveAbout = function(timeStep) {
-
-};
-
+	this.path = this.newPath();
 	var newTopLeftCoords = locationHelper.vectorToTopLeftCoords({
 		vector: this.vector,
 		entitySize: {
@@ -54,6 +52,24 @@ B.prototype.moveAbout = function(timeStep) {
 		newTopLeftCoords: newTopLeftCoords,
 		timeStep: timeStep
 	});
+};
+
+B.prototype.newPath = function() {
+	var newBearing = this.path.vector.verticalAngle() + ((Math.Random() * bearingVariation) - (bearingVariation / 2));
+	var vectorXNew = this.path.vector.magnitude() * Math.sin(newBearing);
+	var vectorYNew = this.path.vector.magnitude() * Math.cos(newBearing);
+	var newVector = new Victor(vectorXNew, vectorYNew);
+	var xNew = this.path.currentCoords.x - newVector.x;
+	var yNew = this.path.currentCoords.y + newVector.y;
+	return {
+			currentCoords: {
+				x: xNew,
+				y: yNew
+			},
+			vector: newVector
+		};
+}
+
 
 // B.prototype.check = function(entities) { // superclass
 // 	for (var entity of entities) {
