@@ -20,10 +20,11 @@ function B(id) {
 	}
 	// superclass
 	// this.behaviours = { // toggle?
-	// 	default: [ function() {this.moveAbout()}, function() {this.poop()} ],
+	// 	default: [ function() {this.moveAbout(354)}, function() {this.poop()} ],
 	// 	this.class: {
-	// 		0: [ function() {this.procreate()} ], // continue moving?
-	// 		5: [ function() {this.wiggle()} ]
+	// 		proximity = 0: [ function() {this.procreate()} ], // continue moving?
+	// 		proximity < 5: [ function() {this.wiggle()} ]
+	// 		noise > 5: [ function() {this.wiggle()} ]
 	// 	},
 	// 	'a': {
 	// 		0: [ function() {this.stopMovingAbout()}, function() {this.shake()} ] // handle toggling behaviours like this?
