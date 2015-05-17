@@ -18,7 +18,7 @@ LocationHelper.prototype.coordsToTopLeftCoords = function(args) {
 	}
 }
 
-LocationHelper.prototype.animateTo = function(args) {
+LocationHelper.prototype.moveTo = function(args) {
 	args.$element.css({
 		top: args.newTopLeftCoords.y + '%',
 		left: args.newTopLeftCoords.x + '%'
