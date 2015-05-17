@@ -1,7 +1,10 @@
-function B(id) {
+function B(id, world) {
 		this.id = id; // increment on creation?
 		this.class = 'b';
-		this.$element = $('<div id="' + this.id + '" class="' + this.class + '"></div>')
+		this.world = world;
+		this.$element = $('<div></div>')
+		this.$element.attr('id', this.id)
+		this.$element.addClass(this.class)
 		this.diameter = 30; // superclass
 		this.pathStep = 0.2;
 		this.path = {
@@ -17,6 +20,7 @@ function B(id) {
 			top: this.path.currentCoords.y + '%',
 			left: this.path.currentCoords.x + '%'
 		})
+		this.time()
 	}
 	// superclass
 	// this.behaviours = { // toggle?
@@ -35,18 +39,17 @@ function B(id) {
 	// 	}
 	// }
 
-B.prototype.time = function(world, timeStep) { // superclass
-	// entities = world.sense(entities);
-
-	// this.vector << updated
-	// new coords
-
-	this.moveAbout(timeStep) // Remove into react later!!!!!!!!!!!!!!!!!!!
-		// args = world.sense(entities, objects, ideas, sound);
+B.prototype.time = function() { // superclass
+	var timeStep = 10;
+	console.log('time')
+	this.time = setInterval(function() { //http://stackoverflow.com/questions/1280263/changing-the-interval-of-setinterval-while-its-running
+		// entities = world.sense(entities); // args = world.sense(entities, objects, ideas, sound);
 		// this.check(entities) //<< make callback of world.sense() above
+		this.moveAbout().bind(this) // Remove into react later!!!!!!!!!!!!!!!!!!!
+	}, timeStep)
 };
 
-B.prototype.moveAbout = function(timeStep) {
+B.prototype.moveAbout = function() {
 	this.path = this.newPath();
 	var newTopLeftCoords = locationHelper.coordsToTopLeftCoords({
 		coords: this.path.currentCoords,
@@ -55,26 +58,26 @@ B.prototype.moveAbout = function(timeStep) {
 			y: this.diameter
 		}
 	});
-	locationHelper.animateTo({
+	locationHelper.moveTo({
 		$element: this.$element,
 		newTopLeftCoords: newTopLeftCoords,
-		timeStep: timeStep
 	});
 };
 
 B.prototype.newPath = function() {
 	var bearingVariation = Math.PI / 6;
-	var newBearing = this.path.vector.verticalAngle() + ((Math.random() * bearingVariation) - (bearingVariation / 2));
-	var vectorXNew = this.path.vector.magnitude() * Math.sin(newBearing);
-	var vectorYNew = this.path.vector.magnitude() * Math.cos(newBearing);
-	var newVector = new Victor(vectorXNew, vectorYNew);
-	var xNew = this.path.currentCoords.x - newVector.x;
-	var yNew = this.path.currentCoords.y + newVector.y;
+	var distanceToMove = this.path.vector.magnitude()
+	var newVector = locationHelper.nextVectorOnSmoothPath({
+		bearingVariation: bearingVariation,
+		magnitude: distanceToMove,
+		currentVector: this.path.vector
+	})
+	var newCoords = locationHelper.newCoordsFromVector({ // Vector points backwards in time
+		currentCoords: this.path.currentCoords,
+		vector: newVector
+	})
 	return {
-		currentCoords: {
-			x: xNew,
-			y: yNew
-		},
+		currentCoords: newCoords,
 		vector: newVector
 	};
 }

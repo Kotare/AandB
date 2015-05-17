@@ -1,24 +1,21 @@
 function World() {
-	this.entities = this.generateEntities(); //{a: [], b: []}
+	this.$element = $('world')
+	this.entities = this.initializeEntities(); //{a: [], b: []}
+	this.renderEntities()
 }
 
-World.prototype.generateEntities = function() {
+World.prototype.initializeEntities = function() {
 	var initialEntities = []
-	for (var i = 1; i <= 50; i++) {
+	for (var i = 1; i <= 5; i++) {
 		initialEntities.push(new B(i))
 	}
 	return initialEntities
 }
 
 World.prototype.renderEntities = function() {
+	console.log(this.entities, 'renderentities')
 	for (var entity of this.entities) {
-		$('#world').append(entity.$element)
-	}
-}
-
-World.prototype.propagateTime = function(timeStep) {
-	for (var entity of this.entities) {
-		entity.time(timeStep) // b.time()
+		this.$element.append(entity.$element)
 	}
 }
 
