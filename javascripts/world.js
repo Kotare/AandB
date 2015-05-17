@@ -7,7 +7,10 @@ function World() {
 World.prototype.initializeEntities = function() {
 	var initialEntities = []
 	for (var i = 1; i <= 50; i++) {
-		initialEntities.push(new B(i, Math.random() * (100 - 3) + 3))
+		initialEntities.push(new B({
+				id: i,
+				timeStep: Math.random() * (100 - 3) + 3
+		}))
 	}
 	return initialEntities
 }

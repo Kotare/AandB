@@ -1,7 +1,7 @@
-function B(id, timeStep) {
-		this.id = id; // increment on creation?
+function B(args) {
+		this.id = args.id; // increment on creation?
 		this.class = 'b';
-		this.timeStep = timeStep;
+		this.timeStep = args.timeStep;
 		this.$element = $('<div></div>')
 		this.$element.attr('id', this.id)
 		this.$element.addClass(this.class)
