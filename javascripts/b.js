@@ -1,7 +1,7 @@
-function B(id, world) {
+function B(id, timeStep) {
 		this.id = id; // increment on creation?
 		this.class = 'b';
-		this.world = world;
+		this.timeStep = timeStep;
 		this.$element = $('<div></div>')
 		this.$element.attr('id', this.id)
 		this.$element.addClass(this.class)
@@ -40,8 +40,7 @@ function B(id, world) {
 	// }
 
 B.prototype.time = function() { // superclass
-	var timeStep = 10;
-	this.time = setInterval(this.check.bind(this), timeStep) //http://stackoverflow.com/questions/1280263/changing-the-interval-of-setinterval-while-its-running	
+	this.time = setInterval(this.check.bind(this), this.timeStep) //http://stackoverflow.com/questions/1280263/changing-the-interval-of-setinterval-while-its-running	
 };
 
 B.prototype.check = function() {

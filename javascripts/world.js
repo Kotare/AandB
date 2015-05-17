@@ -6,8 +6,8 @@ function World() {
 
 World.prototype.initializeEntities = function() {
 	var initialEntities = []
-	for (var i = 1; i <= 5; i++) {
-		initialEntities.push(new B(i))
+	for (var i = 1; i <= 50; i++) {
+		initialEntities.push(new B(i, Math.random() * (100 - 3) + 3))
 	}
 	return initialEntities
 }
