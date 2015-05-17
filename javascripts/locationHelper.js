@@ -29,15 +29,15 @@ LocationHelper.prototype.nextVectorOnSmoothPath = function(args) {
 	var newBearing = args.currentVector.verticalAngle() +
 		((Math.random() * args.bearingVariation) -
 			(args.bearingVariation / 2));
-	var vectorXNew = args.distanceToMove * Math.sin(newBearing);
-	var vectorYNew = args.distanceToMove * Math.cos(newBearing);
+	var vectorXNew = args.magnitude * Math.sin(newBearing);
+	var vectorYNew = args.magnitude * Math.cos(newBearing);
 	return new Victor(vectorXNew, vectorYNew);
 }
 
 LocationHelper.prototype.newCoordsFromNewVector = function(args) {
 	// vector coordinate system points up and right,
 	// dom coordinate system points down and right
-	var xNew = this.path.currentCoords.x - newVector.x;
-	var yNew = this.path.currentCoords.y + newVector.y;
+	var xNew = args.currentCoords.x - args.vector.x;
+	var yNew = args.currentCoords.y + args.vector.y;
 	return { x: xNew, y: yNew }
 }

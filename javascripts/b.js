@@ -41,16 +41,38 @@ function B(id, world) {
 
 B.prototype.time = function() { // superclass
 	var timeStep = 10;
-	console.log('time')
-	this.time = setInterval(function() { //http://stackoverflow.com/questions/1280263/changing-the-interval-of-setinterval-while-its-running
-		// entities = world.sense(entities); // args = world.sense(entities, objects, ideas, sound);
-		// this.check(entities) //<< make callback of world.sense() above
-		this.moveAbout().bind(this) // Remove into react later!!!!!!!!!!!!!!!!!!!
-	}, timeStep)
+	this.time = setInterval(this.check.bind(this), timeStep) //http://stackoverflow.com/questions/1280263/changing-the-interval-of-setinterval-while-its-running	
 };
+
+B.prototype.check = function() {
+		// entities = this.world.sense(entities); // args = world.sense(entities, objects, ideas, sound);
+		// this.process(entities) //<< make callback of world.sense() above
+	this.moveAbout() // Remove into react later!!!!!!!!!!!!!!!!!!!
+};
+
+B.prototype.process = function(entities) { // superclass
+	// 	for (var entity of entities) {
+	// 		var proximity = LocationHelper.proximity({
+	// 											subject: {vector: this.vector, 		diameter: this.diameter},
+	// 											object:  {vector: entity.vector, 	diameter: entity.diameter}
+	// 										});
+	// 		this.react(this.class, proximity) //<< make callback of LocationHelper.proximity() above
+	// 	}
+}
+
+// B.prototype.react = function(class, proximity) {
+// 	for (var prox = proximity; prox <= 100; prox++) {
+// 		if (this.behaviours.class.prox) {
+// 			for (var funct of functions) {
+// 				funct()
+// 			}
+// 		}
+// 	};
+// }
 
 B.prototype.moveAbout = function() {
 	this.path = this.newPath();
+	// console.log(this.path);
 	var newTopLeftCoords = locationHelper.coordsToTopLeftCoords({
 		coords: this.path.currentCoords,
 		entitySize: {
@@ -58,6 +80,7 @@ B.prototype.moveAbout = function() {
 			y: this.diameter
 		}
 	});
+
 	locationHelper.moveTo({
 		$element: this.$element,
 		newTopLeftCoords: newTopLeftCoords,
@@ -72,7 +95,7 @@ B.prototype.newPath = function() {
 		magnitude: distanceToMove,
 		currentVector: this.path.vector
 	})
-	var newCoords = locationHelper.newCoordsFromVector({ // Vector points backwards in time
+	var newCoords = locationHelper.newCoordsFromNewVector({ // Vector points backwards in time
 		currentCoords: this.path.currentCoords,
 		vector: newVector
 	})
@@ -83,22 +106,3 @@ B.prototype.newPath = function() {
 }
 
 
-// B.prototype.check = function(entities) { // superclass
-// 	for (var entity of entities) {
-// 		var proximity = LocationHelper.proximity({
-// 											subject: {vector: this.vector, 		diameter: this.diameter},
-// 											object:  {vector: entity.vector, 	diameter: entity.diameter}
-// 										});
-// 		this.react(this.class, proximity) //<< make callback of LocationHelper.proximity() above
-// 	}
-// }
-
-// B.prototype.react = function(class, proximity) {
-// 	for (var prox = proximity; prox <= 100; prox++) {
-// 		if (this.behaviours.class.prox) {
-// 			for (var funct of functions) {
-// 				funct()
-// 			}
-// 		}
-// 	};
-// }

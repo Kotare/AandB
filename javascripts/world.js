@@ -1,5 +1,5 @@
 function World() {
-	this.$element = $('world')
+	this.$element = $('#world')
 	this.entities = this.initializeEntities(); //{a: [], b: []}
 	this.renderEntities()
 }
@@ -13,7 +13,6 @@ World.prototype.initializeEntities = function() {
 }
 
 World.prototype.renderEntities = function() {
-	console.log(this.entities, 'renderentities')
 	for (var entity of this.entities) {
 		this.$element.append(entity.$element)
 	}
