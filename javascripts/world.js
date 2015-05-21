@@ -6,11 +6,16 @@ function World() {
 
 World.prototype.initializeEntities = function() {
 	var initialEntities = []
-	for (var i = 1; i <= 5; i++) {
+	var numEntities = 2
+	var timeStep = {
+		max: 5,
+		min: 1
+	}
+	for (var i = 1; i <= numEntities; i++) {
 		initialEntities.push(new B({
 				id: i,
 				world: this,
-				timeStep: Math.random() * (100 - 3) + 3
+				timeStep: Math.random() * (timeStep.max - timeStep.min) + timeStep.min
 		}))
 	}
 	return initialEntities

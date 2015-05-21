@@ -1,15 +1,18 @@
 var locationHelper = new LocationHelper(); // "required"
 
+smoothMove.call(B.prototype); // () adds smoothMove as a mixin to B
+
 function B(args) {
 	this.world = args.world
 	this.id = args.id; // increment on creation?
-	this.class = 'b';
+	this.klass = 'b';
 	this.timeStep = args.timeStep;
 	this.$element = $('<div></div>');
 	this.$element.attr('id', this.id);
-	this.$element.addClass(this.class);
+	this.$element.addClass(this.klass);
 	this.diameter = 30; // superclass
 	this.pathStep = 0.2;
+	this.bearingVariation = Math.PI / 6;
 	this.path = {
 		currentCoords: {
 			x: 50,
@@ -23,7 +26,20 @@ function B(args) {
 		top: this.path.currentCoords.y + '%',
 		left: this.path.currentCoords.x + '%'
 	});
+	this.reactions = {
+		'default': this.moveAbout.bind(this),
+		// a: this.reactionsToA,
+		// 'b': this.moveAbout.bind(this)
+		'b': this.reactionsToB.bind(this)
+	}
 	this.born();
+}
+
+B.prototype.reactionsToB = function(proximity) {
+	console.log(proximity)
+	if (proximity < 5) {
+		this.moveAbout() // Remove into react later!!!!!!!!!!!!!!!!!!!
+	}
 }
 	// superclass
 	// this.behaviours = { // toggle?
@@ -47,11 +63,9 @@ B.prototype.born = function() { // superclass
 };
 
 B.prototype.check = function() {
-	this.moveAbout() // Remove into react later!!!!!!!!!!!!!!!!!!!
-	entities = this.world.sense(this, function(entities) {
+	var entities = this.world.sense(this, function(entities) {
 		this.process(entities);
 	}); // args = world.sense(entities, objects, ideas, sound);
-	//<< make callback of world.sense() above
 };
 
 B.prototype.process = function(entities) { // superclass
@@ -60,54 +74,22 @@ B.prototype.process = function(entities) { // superclass
 											subject: { coords: this.path.currentCoords, 		diameter: this.diameter },
 											object:  { coords: entity.path.currentCoords, 	diameter: entity.diameter }
 										});
-		console.log(proximity)
-		this.react(this.class, proximity) //<< make callback of LocationHelper.proximity() above
+		this.react(entity.klass, proximity) //<< make callback of LocationHelper.proximity() above
+		// this.react('default', proximity) //<< make callback of LocationHelper.proximity() above
 	}
 };
 
-// B.prototype.react = function(class, proximity) {
-// 	for (var prox = proximity; prox <= 100; prox++) {
-// 		if (this.behaviours.class.prox) {
-// 			for (var funct of functions) {
-// 				funct()
-// 			}
-// 		}
-// 	};
-// }
-
-B.prototype.moveAbout = function() {
-	this.path = this.newPath();
-	// console.log(this.path);
-	var newTopLeftCoords = locationHelper.coordsToTopLeftCoords({
-		coords: this.path.currentCoords,
-		entitySize: {
-			x: this.diameter,
-			y: this.diameter
-		}
-	});
-
-	locationHelper.moveTo({
-		$element: this.$element,
-		newTopLeftCoords: newTopLeftCoords,
-	});
-};
-
-B.prototype.newPath = function() {
-	var bearingVariation = Math.PI / 6;
-	var distanceToMove = this.path.vector.magnitude();
-	var newVector = locationHelper.nextVectorOnSmoothPath({
-		bearingVariation: bearingVariation,
-		magnitude: distanceToMove,
-		currentVector: this.path.vector
-	});
-	var newCoords = locationHelper.newCoordsFromNewVector({ // Vector points backwards in time
-		currentCoords: this.path.currentCoords,
-		vector: newVector
-	});
-	return {
-		currentCoords: newCoords,
-		vector: newVector
-	};
-};
+B.prototype.react = function(klass, proximity) {
+	this.reactions[klass](proximity)
+}
 
 
+
+
+	// for (var prox = proximity; prox <= 100; prox++) {
+	// 	if (this.behaviours.class.prox) {
+	// 		for (var funct of functions) {
+	// 			funct()
+	// 		}
+	// 	}
+	// };
