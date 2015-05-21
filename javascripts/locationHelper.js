@@ -18,6 +18,7 @@ LocationHelper.prototype.coordsToTopLeftCoords = function(args) {
 	}
 }
 
+
 LocationHelper.prototype.moveTo = function(args) {
 	args.$element.css({
 		top: args.newTopLeftCoords.y + '%',
@@ -25,7 +26,7 @@ LocationHelper.prototype.moveTo = function(args) {
 	})
 }
 
-LocationHelper.prototype.nextVectorOnSmoothPath = function(args) {
+LocationHelper.prototype.nextVectorOnSmoothPath = function(args) { // test with jasmine spies (~ mocks/doubles) on Math.random()!
 	var newBearing = args.currentVector.verticalAngle() +
 		((Math.random() * args.bearingVariation) -
 			(args.bearingVariation / 2));

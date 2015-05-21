@@ -6,9 +6,10 @@ function World() {
 
 World.prototype.initializeEntities = function() {
 	var initialEntities = []
-	for (var i = 1; i <= 50; i++) {
+	for (var i = 1; i <= 5; i++) {
 		initialEntities.push(new B({
 				id: i,
+				world: this,
 				timeStep: Math.random() * (100 - 3) + 3
 		}))
 	}
@@ -21,6 +22,6 @@ World.prototype.renderEntities = function() {
 	}
 }
 
-World.prototype.sense = function(callback) {
-	return this.entities
+World.prototype.sense = function(entity, callback) {
+	callback.apply(entity, [this.entities])
 }
