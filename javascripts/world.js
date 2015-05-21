@@ -8,8 +8,8 @@ World.prototype.initializeEntities = function() {
 	var initialEntities = []
 	var numEntities = 2
 	var timeStep = {
-		max: 5,
-		min: 1
+		max: 30,
+		min: 20
 	}
 	for (var i = 1; i <= numEntities; i++) {
 		initialEntities.push(new B({
@@ -27,6 +27,8 @@ World.prototype.renderEntities = function() {
 	}
 }
 
-World.prototype.sense = function(entity, callback) {
-	callback.apply(entity, [this.entities])
+World.prototype.sense = function(id) {
+	return $.grep(this.entities, function(e) {
+		return e.id != id;
+	});
 }

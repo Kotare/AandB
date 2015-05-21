@@ -11,7 +11,7 @@ function B(args) {
 	this.$element.attr('id', this.id);
 	this.$element.addClass(this.klass);
 	this.diameter = 30; // superclass
-	this.pathStep = 0.2;
+	this.pathStep = 0.1;
 	this.bearingVariation = Math.PI / 6;
 	this.path = {
 		currentCoords: {
@@ -29,15 +29,14 @@ function B(args) {
 	this.reactions = {
 		'default': this.moveAbout.bind(this),
 		// a: this.reactionsToA,
-		// 'b': this.moveAbout.bind(this)
 		'b': this.reactionsToB.bind(this)
 	}
 	this.born();
 }
 
 B.prototype.reactionsToB = function(proximity) {
-	console.log(proximity)
-	if (proximity < 5) {
+		console.log(proximity)
+	if (proximity < 10) {
 		this.moveAbout() // Remove into react later!!!!!!!!!!!!!!!!!!!
 	}
 }
@@ -63,9 +62,11 @@ B.prototype.born = function() { // superclass
 };
 
 B.prototype.check = function() {
-	var entities = this.world.sense(this, function(entities) {
-		this.process(entities);
-	}); // args = world.sense(entities, objects, ideas, sound);
+	var entities = this.world.sense(this.id); // args = world.sense(entities, objects, ideas, sound);
+	console.log(entities)
+	// entities.pop(this)
+	// console.log(entities)
+	this.process(entities);
 };
 
 B.prototype.process = function(entities) { // superclass
