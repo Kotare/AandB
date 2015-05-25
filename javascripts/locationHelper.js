@@ -21,8 +21,8 @@ LocationHelper.prototype.coordsToTopLeftCoords = function(args) {
 
 LocationHelper.prototype.moveTo = function(args) {
 	args.$element.css({
-		top: args.newTopLeftCoords.y + '%',
-		left: args.newTopLeftCoords.x + '%'
+		top: args.newTopLeftCoords.y + 'px',
+		left: args.newTopLeftCoords.x + 'px'
 	})
 }
 

@@ -1,5 +1,7 @@
 function World() {
 	this.$element = $('#world')
+	this.size = Math.max( $(window).height(), $(window).width() )
+	debugger
 	this.entities = this.initializeEntities(); //{a: [], b: []}
 	this.renderEntities()
 }
@@ -8,8 +10,8 @@ World.prototype.initializeEntities = function() {
 	var initialEntities = []
 	var numEntities = 2
 	var timeStep = {
-		max: 30,
-		min: 20
+		max: 300,
+		min: 200
 	}
 	for (var i = 1; i <= numEntities; i++) {
 		initialEntities.push(new B({

@@ -10,21 +10,23 @@ function B(args) {
 	this.$element = $('<div></div>');
 	this.$element.attr('id', this.id);
 	this.$element.addClass(this.klass);
-	this.diameter = 30; // superclass
-	this.pathStep = 0.1;
+	this.diameterHeightPercent = 0.02; // superclass
+	this.diameter = this.diameterHeightPercent * this.world.size;
+	this.pathStepPercent = 0.001;
+	this.pathStep = this.pathStepPercent * this.world.size;
 	this.bearingVariation = Math.PI / 6;
 	this.path = {
 		currentCoords: {
-			x: 50,
-			y: 50
+			x: this.world.size * 0.5,
+			y: this.world.size * 0.5
 		},
 		vector: new Victor(0, -(this.pathStep)) //backwards-pointing vector, randomise later
 	};
 	this.$element.css({
-		width: this.diameter,
-		height: this.diameter,
-		top: this.path.currentCoords.y + '%',
-		left: this.path.currentCoords.x + '%'
+		width: this.diameter + 'px',
+		height: this.diameter + 'px',
+		top: this.path.currentCoords.y + 'px',
+		left: this.path.currentCoords.x + 'px'
 	});
 	this.reactions = {
 		'default': this.moveAbout.bind(this),
