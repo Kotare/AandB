@@ -1,3 +1,4 @@
+'use strict';
 var locationHelper = new LocationHelper(); // "required"
 
 smoothMove.call(B.prototype); // () adds smoothMove as a mixin to B

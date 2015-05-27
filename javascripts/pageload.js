@@ -1,3 +1,4 @@
+'use strict';
 locationHelper = new LocationHelper();
 
 $(document).ready(function() {

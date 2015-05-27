@@ -1,7 +1,7 @@
+'use strict';
 function World() {
 	this.$element = $('#world')
 	this.size = Math.max( $(window).height(), $(window).width() )
-	debugger
 	this.entities = this.initializeEntities(); //{a: [], b: []}
 	this.renderEntities()
 }
@@ -12,7 +12,7 @@ World.prototype.initializeEntities = function() {
 	var timeStep = {
 		max: 300,
 		min: 200
-	}
+	};
 	for (var i = 1; i <= numEntities; i++) {
 		initialEntities.push(new B({
 				id: i,
@@ -25,7 +25,7 @@ World.prototype.initializeEntities = function() {
 
 World.prototype.renderEntities = function() {
 	for (var entity of this.entities) {
-		this.$element.append(entity.$element)
+		this.$element.append(entity.$element);
 	}
 }
 
