@@ -38,7 +38,7 @@ describe("World", function() {
 		})
 	})
 
-	describe("#initializeEntities", function() {
+	describe("#initializeEntities()", function() {
 		it("returns an array", function() {
 			var response = world.initializeEntities();
 			expect(response).to.be.a('array')
@@ -52,12 +52,12 @@ describe("World", function() {
 		it("returned array contains at least one entity") // test for Entity superclass?
 	})
 
-	describe("#renderEntities", function() {
+	describe("#renderEntities()", function() {
 		it("adds all entities to the DOM") // Testable? View-model separation? Samson, help!
 	})
 
 	var response; //help
-	describe("#sense", function() {
+	describe("#sense()", function() {
 		beforeEach(function() {
 			var B1 = sandbox.stub( B, "id", function(arguments) { return 1; });
 			var B2 = sandbox.stub( B, "id", function(arguments) { return 2; });
