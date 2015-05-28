@@ -6,8 +6,7 @@ describe("World", function() {
 	beforeEach(function() {
 		this.sandbox = sinon.sandbox.create();
 		this.world = new World();
-		this.B = this.sandbox.stub();
-		console.log(this.B);
+		this.b = this.sandbox.stub(B, 'sense');
 	})
 
 	afterEach(function() {
@@ -17,16 +16,11 @@ describe("World", function() {
 	describe("constructor", function() {
 
 		it("initializes 2x 'B' entities & stores them in this.entities", function() {
-			// var fakeEntities = ['entity1', 'entity2']
-			// // var initializeEntities = this.sandbox.stub(World.prototype, "initializeEntities", function() {
-			// 	return fakeEntities
-			// });
-
-			world = new World();
-			expect(world.entities).to.equal(fakeEntities);
+			expect(this.world.entities[0].klass).to.eq('b');
+			expect(this.world.entities[1].klass).to.eq('b');
 		})
 
-		it("calls renderEntities()", function() {
+		it("sends command to viewModel() with correct params", function() {
 			var renderEntities = this.sandbox.spy(World.prototype, 'renderEntities');
 			world = new World;
 			expect(world.renderEntities.called).to.be.true;
