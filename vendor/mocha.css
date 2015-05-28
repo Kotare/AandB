@@ -50,7 +50,8 @@ body {
 
 #mocha h2 {
   font-size: 12px;
-  font-weight: normal;
+  font-weight: bold;
+  color: ;
   cursor: pointer;
 }
 
@@ -105,7 +106,7 @@ body {
 }
 
 #mocha .test.pending {
-  color: #0b97c4;
+  color: #CE720B;
 }
 
 #mocha .test.pending::before {
@@ -115,6 +116,10 @@ body {
 
 #mocha .test.fail {
   color: #c00;
+}
+
+#mocha li.fast h2 {
+  color: green;
 }
 
 #mocha .test.fail pre {

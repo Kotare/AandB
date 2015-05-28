@@ -36,7 +36,15 @@ describe("B", function() {
 		it("calls this.born()")
 	})
 
-	describe("#")
+	describe("#calculateInitialProperties()", function() {
+		it("calls this.createDomElement()")
+	})
+
+	describe("#reactionsToOwnClass()", function() {
+		it("calls this.moveAbout() if proximity < 10px")
+		
+		it("doesn't call this.moveAbout() if proximity > 10px")
+	})
 
 
 
