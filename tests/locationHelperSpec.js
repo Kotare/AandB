@@ -13,13 +13,46 @@ describe("LocationHelper", function() {
 	})
 
 	describe("#proximity()", function() {
-		it("returns a the correct closest distance between circular entities of different sizes")
+		it("returns a the correct closest distance between circular entities of different sizes", function() {
+			var rightAngleTriangleSides = {
+				a: 30,
+				o: 40,
+				hypotenuse: 50
+			}
+			var args = {
+				subject: {
+					diameter: 10,
+					coords: {
+						x: 0,
+						y: 0
+					}
+				},
+				object: {
+					diameter: 10,
+					coords: {
+						x: rightAngleTriangleSides.a,
+						y: rightAngleTriangleSides.o
+					}
+				}
+			};
+			expect(locationHelper.proximity(args)).to.equal(
+				rightAngleTriangleSides.hypotenuse - (args.subject.diameter + args.object.diameter) / 2
+			)
+		})
 	})
 
 	describe("#nextVectorOnSmoothPath()", function() {
-		it("returns a vector")
-
-		it("returned vector is different to passed vector")
+		it("returns a vector with correctly adjusted bearing & magnitude", function() {
+			var args = {
+				bearingVariation: Math.PI / 4,
+				magnitude: 1,
+				currentVector: new Victor(0, -1)
+			}
+			var response = locationHelper.nextVectorOnSmoothPath(args)
+			expect(response).to.respondTo('verticalAngle')
+			expect(response.verticalAngle).to.be.within( -Math.PI/8, Math.PI/8)
+			expect(response.magnitude).to.be(args.magnitude)
+		})
 	})
 
 	describe("#newCoordsFromNewVector()", function() {
