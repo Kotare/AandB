@@ -1,14 +1,15 @@
 var expect = chai.expect,
-		locationHelperProximity = sinon.spy(LocationHelper.prototype, "proximity");
+	locationHelperProximity = sinon.spy(LocationHelper.prototype, "proximity");
 
 describe("B", function() {
 	var b;
 	var sandbox = sinon.sandbox.create();
+	var world;
 
 	beforeEach(function() {
-		// var world = sandbox.stub()
-		var A1 = function() { 
-			path: function() { 
+		var A1 = {
+			diameter: 50,
+			path: function() {
 				return {
 					currentCoords: {
 						x: 20,
@@ -17,12 +18,20 @@ describe("B", function() {
 				}
 			}
 		}
-		var args = sandbox.spy(world, "sense", function() { return [A1]; })
+		var world = sandbox.stub(World.prototype, "sense", function() {
+			return [A1]
+		});
+		console.log(world);
+		var args = {
+			id: 1,
+			world: world,
+			timeStep: 2000
+		}
 		b = new B(args);
 	})
 
 	describe("constructor", function() {
-		it("has a class(klass)", function() {
+		it("has a class (klass)", function() {
 			console.log(b);
 			expect(b.klass).to.not.be.empty;
 		})

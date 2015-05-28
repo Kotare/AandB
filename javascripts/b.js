@@ -4,37 +4,48 @@ var locationHelper = new LocationHelper(); // "required"
 smoothMove.call(B.prototype); // () adds smoothMove as a mixin to B
 
 function B(args) {
+	// Specify properties
 	this.world = args.world
 	this.id = args.id; // increment on creation?
 	this.klass = 'b';
 	this.timeStep = args.timeStep;
-	this.$element = $('<div></div>');
-	this.$element.attr('id', this.id);
-	this.$element.addClass(this.klass);
 	this.diameterHeightPercent = 0.02; // superclass
-	this.diameter = this.diameterHeightPercent * this.world.size;
 	this.pathStepPercent = 0.001;
-	this.pathStep = this.pathStepPercent * this.world.size;
 	this.bearingVariation = Math.PI / 6;
-	this.path = {
-		currentCoords: {
-			x: this.world.size * 0.5,
-			y: this.world.size * 0.5
-		},
-		vector: new Victor(0, -(this.pathStep)) //backwards-pointing vector, randomise later
-	};
-	this.$element.css({
-		width: this.diameter + 'px',
-		height: this.diameter + 'px',
-		top: this.path.currentCoords.y + 'px',
-		left: this.path.currentCoords.x + 'px'
-	});
 	this.reactions = {
 		'default': this.moveAbout.bind(this),
 		// a: this.reactionsToA,
 		'b': this.reactionsToB.bind(this)
 	}
+
+	// Launch initial actions
+	this.calculateInitialProperties()
 	this.born();
+}
+
+B.prototype.calculateInitialProperties = function() {
+	this.diameter = this.diameterHeightPercent * this.world.size;
+	this.pathStep = this.pathStepPercent * this.world.size;
+	this.path = {
+		currentCoords: {
+			x: this.world.size * 0.5,
+			y: this.world.size * 0.5
+		},
+		vector: new Victor(0, - (this.pathStep)) //backwards-pointing vector, randomise later
+	};
+	this.createDomElement();
+}
+
+B.prototype.createDomElement = function() {
+	this.$element = $('<div></div>');
+	this.$element.attr('id', this.id);
+	this.$element.addClass(this.klass);
+	this.$element.css({
+		width: this.diameter + 'px',
+		height: this.diameter + 'px',
+		top: this.path.currentCoords.y + 'px',
+		left: this.path.currentCoords.x + 'px'
+	});	
 }
 
 B.prototype.reactionsToB = function(proximity) {
