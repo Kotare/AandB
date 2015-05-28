@@ -59,17 +59,15 @@ describe("World", function() {
 	var response; //help
 	describe("#sense()", function() {
 		beforeEach(function() {
-			var B1 = sandbox.stub( B, "id", function(arguments) { return 1; });
-			var B2 = sandbox.stub( B, "id", function(arguments) { return 2; });
-			var worldEntities = sandbox.stub( World, "entities", function() { return [B1, B2]; })
+			var B1 = { id: 1 }
+			var B2 = { id: 2 }
 			// console.log(world.entities);
 			world = new World()
+			var worldEntities = sandbox.stub( world, "entities", function() { return [B1, B2]; })
 			console.log(world.sense(1));
 			var response = world.sense(1);
 		})
 		it("returns an array", function() {
-			console.log(response);
-
 			expect(world.sense(1)).to.be.a('array')
 		})
 

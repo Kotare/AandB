@@ -50,8 +50,11 @@ describe("LocationHelper", function() {
 			}
 			var response = locationHelper.nextVectorOnSmoothPath(args)
 			expect(response).to.respondTo('verticalAngle')
-			expect(response.verticalAngle).to.be.within( -args.maxTotalBearingVariation, Math.PI/8)
-			expect(response.magnitude).to.be(args.magnitude)
+			expect(response.verticalAngle).to.be.within( 
+				-args.maxTotalBearingVariation / 2, 
+				args.maxTotalBearingVariation / 2
+			)
+			expect(response.magnitude()).to.be(args.magnitude)
 		})
 	})
 
