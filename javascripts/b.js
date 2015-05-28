@@ -51,7 +51,7 @@ B.prototype.createDomElement = function() {
 }
 
 B.prototype.reactionsToB = function(proximity) {
-		console.log(proximity)
+		// console.log(proximity)
 	if (proximity < 10) {
 		this.moveAbout() // Remove into react later!!!!!!!!!!!!!!!!!!!
 	}
@@ -79,7 +79,7 @@ B.prototype.born = function() { // superclass
 
 B.prototype.check = function() {
 	var entities = this.world.sense(this.id); // args = world.sense(entities, objects, ideas, sound);
-	console.log(entities)
+	// console.log(entities)
 	// entities.pop(this)
 	// console.log(entities)
 	this.process(entities);
