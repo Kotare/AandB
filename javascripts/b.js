@@ -13,7 +13,7 @@ function B(args) {
 	this.klass = 'b';
 	this.diameterHeightPercent = 0.02; // superclass
 	this.pathStepPercent = 0.001;
-	this.bearingVariation = Math.PI / 6;
+	this.bearingVariation = Math.PI / 6; // MAX
 	this.reactions = {
 		'default': this.moveAbout.bind(this),
 		// a: this.reactionsToA,
@@ -92,7 +92,6 @@ B.prototype.process = function(entities) { // superclass
 											object:  { coords: entity.path.currentCoords, 	diameter: entity.diameter }
 										});
 		this.react(entity.klass, proximity) //<< make callback of LocationHelper.proximity() above
-		// this.react('default', proximity) //<< make callback of LocationHelper.proximity() above
 	}
 };
 

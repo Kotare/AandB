@@ -31,21 +31,28 @@ describe("B", function() {
 	})
 
 	describe("constructor", function() {
-		it("calls this.calculateInitialProperties()")
+		it("!!! DOESN'T LEAVE ENTITIES RUNNING AROUND THE SCREEN FOR 100002 cycles")
 
-		it("calls this.born()")
+		it("calls #calculateInitialProperties()")
+
+		it("calls #born()")
 	})
 
 	describe("#calculateInitialProperties()", function() {
-		it("calls this.createDomElement()")
+		it("calls #createDomElement()")
 	})
 
 	describe("#reactionsToOwnClass()", function() {
 		it("calls this.moveAbout() if proximity < 10px")
-		
+
 		it("doesn't call this.moveAbout() if proximity > 10px")
 	})
 
+	describe("#check()", function() {
+		it("calls #process(), passing an array of entities")
+	})
 
-
+	describe("#process()", function() {
+		it("calls #react(), passing a (k)lass & a proximity")
+	})
 })

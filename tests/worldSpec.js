@@ -1,8 +1,6 @@
 // 'use strict';
 var expect = chai.expect;
 
-
-
 describe("World", function() {
 	var world;
 	var sandbox = sinon.sandbox.create();
