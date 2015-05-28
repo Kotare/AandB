@@ -29,8 +29,8 @@ LocationHelper.prototype.moveTo = function(args) {
 
 LocationHelper.prototype.nextVectorOnSmoothPath = function(args) { // test with jasmine spies (~ mocks/doubles) on Math.random()!
 	var newBearing = args.currentVector.verticalAngle() +
-		((Math.random() * args.bearingVariation) -
-			(args.bearingVariation / 2));
+		((Math.random() * args.maxTotalBearingVariation) -
+			(args.maxTotalBearingVariation / 2));
 	var vectorXNew = args.magnitude * Math.sin(newBearing);
 	var vectorYNew = args.magnitude * Math.cos(newBearing);
 	return new Victor(vectorXNew, vectorYNew);

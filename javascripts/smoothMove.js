@@ -20,10 +20,10 @@ function smoothMove() {
 	};
 
 	this.newPath = function() {
-		// var bearingVariation = Math.PI / 6;
+		// var maxTotalBearingVariation = Math.PI / 6;
 		var distanceToMove = this.path.vector.magnitude();
 		var newVector = locationHelper.nextVectorOnSmoothPath({
-			bearingVariation: this.bearingVariation,
+			maxTotalBearingVariation: this.maxTotalBearingVariation,
 			magnitude: distanceToMove,
 			currentVector: this.path.vector
 		});

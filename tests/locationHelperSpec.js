@@ -44,13 +44,13 @@ describe("LocationHelper", function() {
 	describe("#nextVectorOnSmoothPath()", function() {
 		it("returns a vector with correctly adjusted bearing & magnitude", function() {
 			var args = {
-				bearingVariation: Math.PI / 4,
+				maxTotalBearingVariation: Math.PI / 4,
 				magnitude: 1,
 				currentVector: new Victor(0, -1)
 			}
 			var response = locationHelper.nextVectorOnSmoothPath(args)
 			expect(response).to.respondTo('verticalAngle')
-			expect(response.verticalAngle).to.be.within( -Math.PI/8, Math.PI/8)
+			expect(response.verticalAngle).to.be.within( -args.maxTotalBearingVariation, Math.PI/8)
 			expect(response.magnitude).to.be(args.magnitude)
 		})
 	})
