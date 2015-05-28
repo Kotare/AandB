@@ -4,11 +4,13 @@ var locationHelper = new LocationHelper(); // "required"
 smoothMove.call(B.prototype); // () adds smoothMove as a mixin to B
 
 function B(args) {
-	// Specify properties
+	// Properties set externally
 	this.world = args.world
 	this.id = args.id; // increment on creation?
-	this.klass = 'b';
 	this.timeStep = args.timeStep;
+
+	// B class properties
+	this.klass = 'b';
 	this.diameterHeightPercent = 0.02; // superclass
 	this.pathStepPercent = 0.001;
 	this.bearingVariation = Math.PI / 6;

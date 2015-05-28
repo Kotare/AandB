@@ -17,9 +17,9 @@ describe("World", function() {
 	})
 
 	describe("constructor", function() {
-		it("has a size", function() {
-			expect(world.size).to.exist;
-		})
+		// it("has a size", function() {
+		// 	expect(world.size).to.exist;
+		// })
 
 		it("calls initializeEntities()", function() {
 			var initializeEntities = sandbox.spy(World.prototype, "initializeEntities");
@@ -28,9 +28,9 @@ describe("World", function() {
 			World.prototype.initializeEntities.restore();
 		})
 
-		it("has an array of entities", function() {
-			expect(world.entities).to.be.a('array');
-		})
+		// it("has an array of entities", function() {
+		// 	expect(world.entities).to.be.a('array');
+		// })
 
 		it("calls renderEntities()", function() {
 			var renderEntities = sandbox.spy(World.prototype, 'renderEntities');
@@ -55,10 +55,10 @@ describe("World", function() {
 	})
 
 	describe("#renderEntities", function() {
-		it("adds all entities to the DOM")
+		it("adds all entities to the DOM") // Testable? View-model separation? Samson, help!
 	})
 
-	var response;
+	var response; //help
 	describe("#sense", function() {
 		beforeEach(function() {
 			var B1 = sandbox.stub( B, "id", function(arguments) { return 1; });

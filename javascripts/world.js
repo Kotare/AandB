@@ -2,7 +2,7 @@
 function World() {
 	this.$element = $('#world')
 	this.size = Math.max( $(window).height(), $(window).width() )
-	this.entities = this.initializeEntities(); //{a: [], b: []}
+	this.entities = this.initializeEntities();
 	this.renderEntities()
 }
 

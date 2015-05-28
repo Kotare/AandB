@@ -31,9 +31,13 @@ describe("B", function() {
 	})
 
 	describe("constructor", function() {
-		it("has a class (klass)", function() {
-			console.log(b);
-			expect(b.klass).to.not.be.empty;
-		})
+		it("calls this.calculateInitialProperties()")
+
+		it("calls this.born()")
 	})
+
+	describe("#")
+
+
+
 })
