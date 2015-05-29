@@ -34,36 +34,43 @@ describe("LocationHelper", function() {
 					}
 				}
 			};
-			expect(locationHelper.proximity(args)).to.equal(
+			expect(this.locationHelper.proximity(args)).to.equal(
 				rightAngleTriangleSides.hypotenuse - (args.subject.diameter + args.object.diameter) / 2
 			)
 		})
 	})
 
-	describe("#calculateNewPathStep()", function() {
-		it("returns a vector with correctly adjusted bearing & magnitude", function() {
-			var args = {
-				maxTotalBearingVariation: Math.PI / 4,
-				magnitude: 1,
-				currentVector: new Victor(0, -1)
-			}
-			var response = locationHelper.nextVectorOnSmoothPath(args)
-			expect(response).to.respondTo('verticalAngle')
-			expect(response.verticalAngle).to.be.within( 
-				-args.maxTotalBearingVariation / 2, 
-				args.maxTotalBearingVariation / 2
-			)
-			expect(response.magnitude()).to.be(args.magnitude)
+	describe("#calculateNewPathStep() for an entity", function() {
+		describe("returns a new path", function() {
+			it("with correct new vector & new coords (based on path variation & magnitude)", function() {
+				var args = {
+					currentPath: {
+						coords: {
+							x: 10,
+							y: 10
+						},
+						vector: new Victor(0, -1)
+					},
+					maxTotalBearingVariationDegrees: 45,
+					magnitude: 1
+				}
+				
+				var response = this.locationHelper.calculateNewPathStep(args)
+				
+				expect(response.vector).to.respondTo('verticalAngle')
+				expect(response.vector.verticalAngleDeg()).to.be.within( 
+					(args.currentPath.vector.verticalAngleDeg() - args.maxTotalBearingVariationDegrees / 2) % 360 - 180, 
+					(args.currentPath.vector.verticalAngleDeg() + args.maxTotalBearingVariationDegrees / 2) % 360 - 180
+				)
+				expect(response.vector.magnitude()).to.equal(args.magnitude)
+
+				expect(response.path).to.respondTo('x')
+				expect(response.path).to.respondTo('y')
+			})
 		})
 	})
 
-	describe("#newCoordsFromNewVector()", function() {
-		it("returns coordinates")
-
-		it("returned coords are different from passed coords")
-	})
-
 	describe("#moveTo()", function() {
-		it("calls #coordsToTopLeftCoords to convert from entity centric coords in JS to top-left DOM coord 0")
+		it("[move to viewmodel?] calls #coordsToTopLeftCoords to convert from entity centric coords in JS to top-left DOM coord 0")
 	})
 }) 

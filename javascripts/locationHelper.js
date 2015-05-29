@@ -1,4 +1,5 @@
 'use strict';
+
 function LocationHelper() {
 
 }
@@ -19,27 +20,58 @@ LocationHelper.prototype.coordsToTopLeftCoords = function(args) {
 	}
 }
 
+// MOVE TO VIEW MODEL
+// LocationHelper.prototype.moveTo = function(args) {
+// 	args.$element.css({
+// 		top: args.newTopLeftCoords.y + 'px',
+// 		left: args.newTopLeftCoords.x + 'px'
+// 	})
+// }
 
-LocationHelper.prototype.moveTo = function(args) {
-	args.$element.css({
-		top: args.newTopLeftCoords.y + 'px',
-		left: args.newTopLeftCoords.x + 'px'
+LocationHelper.prototype.calculateNewPathStep = function(args) { // test with jasmine spies (~ mocks/doubles) on Math.random()!
+		console.log(args.maxTotalBearingVariationDegrees);
+	var newVector = this.calculateNewVector({
+		currentVector: args.currentPath.vector,
+		maxTotalBearingVariationDegrees: args.maxTotalBearingVariationDegrees,
+		magnitude: args.magnitude
 	})
+	console.log(newVector)
+	var newCoords = this.calculateCoordsFromNewVector({
+		currentCoords: args.currentPath.coords,
+		vector: newVector
+	})
+	return {
+		coords: newCoords,
+		vector: newVector
+	}
 }
 
-LocationHelper.prototype.nextVectorOnSmoothPath = function(args) { // test with jasmine spies (~ mocks/doubles) on Math.random()!
-	var newBearing = args.currentVector.verticalAngle() +
-		((Math.random() * args.maxTotalBearingVariation) -
-			(args.maxTotalBearingVariation / 2));
-	var vectorXNew = args.magnitude * Math.sin(newBearing);
-	var vectorYNew = args.magnitude * Math.cos(newBearing);
+LocationHelper.prototype.calculateNewVector = function(args) { // test with jasmine spies (~ mocks/doubles) on Math.random()!
+	var newBearingDegrees = args.currentVector.verticalAngleDeg() +
+		((Math.random() * args.maxTotalBearingVariationDegrees) -
+			(args.maxTotalBearingVariationDegrees / 2));
+		console.log(args.currentVector.verticalAngleDeg());
+		console.log(newBearingDegrees);
+	var vectorXNew = args.magnitude * Math.sin(this.toRadians(newBearingDegrees));
+	var vectorYNew = args.magnitude * Math.cos(this.toRadians(newBearingDegrees));
 	return new Victor(vectorXNew, vectorYNew);
 }
 
-LocationHelper.prototype.newCoordsFromNewVector = function(args) {
+LocationHelper.prototype.calculateCoordsFromNewVector = function(args) {
 	// vector coordinate system points up and right,
 	// dom coordinate system points down and right
 	var xNew = args.currentCoords.x - args.vector.x;
 	var yNew = args.currentCoords.y + args.vector.y;
-	return { x: xNew, y: yNew }
+	return {
+		x: xNew,
+		y: yNew
+	}
+}
+
+LocationHelper.prototype.toDegrees = function(angle) {
+  return angle * (180 / Math.PI);
+}
+
+LocationHelper.prototype.toRadians = function(angle) {
+  return angle * (Math.PI / 180);
 }

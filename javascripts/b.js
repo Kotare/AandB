@@ -13,7 +13,7 @@ function B(args) {
 	this.klass = 'b';
 	this.diameterHeightPercent = 0.02; // superclass
 	this.pathStepPercent = 0.001;
-	this.maxTotalBearingVariation = Math.PI / 6; // MAX
+	this.maxTotalBearingVariationDegrees = Math.PI / 6; // MAX
 	this.reactions = {
 		'default': this.moveAbout.bind(this),
 		// a: this.reactionsToA,
