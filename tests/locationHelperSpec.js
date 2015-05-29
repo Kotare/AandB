@@ -1,18 +1,17 @@
 var expect = chai.expect;
 
 describe("LocationHelper", function() {
-	var locationHelper;
-	var sandbox = sinon.sandbox.create();
 
 	beforeEach(function() {
-		locationHelper = new LocationHelper();
+		this.sandbox = sinon.sandbox.create();
+		this.locationHelper = new LocationHelper();
 	})
 
 	afterEach(function() {
-		sandbox.restore();
+		this.sandbox.restore();
 	})
 
-	describe("#proximity()", function() {
+	describe("calculates #proximity()", function() {
 		it("returns a the correct closest distance between circular entities of different sizes", function() {
 			var rightAngleTriangleSides = {
 				a: 30,
@@ -41,7 +40,7 @@ describe("LocationHelper", function() {
 		})
 	})
 
-	describe("#nextVectorOnSmoothPath()", function() {
+	describe("#calculateNewPathStep()", function() {
 		it("returns a vector with correctly adjusted bearing & magnitude", function() {
 			var args = {
 				maxTotalBearingVariation: Math.PI / 4,
