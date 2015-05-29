@@ -30,7 +30,8 @@ World.prototype.renderEntities = function() {
 }
 
 World.prototype.sense = function(id) {
-	return $.grep(this.entities, function(e) {
-		return e.id != id;
-	});
+	// return $.grep(this.entities, function(e) {
+	// 	return e.id != id;
+	// });
+	return this.entities
 }
