@@ -54,8 +54,27 @@ B.prototype.reactionsToB = function(proximity) {
 		// console.log(proximity)
 	if (proximity < 10) {
 		this.moveAbout() // Remove into react later!!!!!!!!!!!!!!!!!!!
+	} // elseif (proximity > 10) {
+
+	} // elseif (proximity > 10) {
+
+	} // elseif (proximity > 10) {
+
+	} // elseif (proximity > 10) {
+
+	} // elseif (proximity > 10) {
+
 	}
 }
+
+B.prototype.reactionsToWall = function(proximity) {
+		// console.log(proximity)
+}
+
+B.prototype.reactionsToClick = function(proximity) {
+		// console.log(proximity)
+}
+
 	// superclass
 	// this.behaviours = { // toggle?
 	// 	default: [ function() {this.moveAbout(354)}, function() {this.poop()} ],
@@ -85,22 +104,15 @@ B.prototype.check = function() {
 	this.process(entities);
 };
 
-B.prototype.process = function(entities) { // superclass
+B.prototype.react = function(entities) { // superclass
 	for (var entity of entities) {
 		var proximity = locationHelper.proximity({
 											subject: { coords: this.path.currentCoords, 		diameter: this.diameter },
 											object:  { coords: entity.path.currentCoords, 	diameter: entity.diameter }
 										});
-		this.react(entity.klass, proximity) //<< make callback of LocationHelper.proximity() above
+		this.reactions[entity.klass](proximity) //<< make callback of LocationHelper.proximity() above
 	}
 };
-
-B.prototype.react = function(klass, proximity) {
-	this.reactions[klass](proximity)
-}
-
-
-
 
 	// for (var prox = proximity; prox <= 100; prox++) {
 	// 	if (this.behaviours.class.prox) {
