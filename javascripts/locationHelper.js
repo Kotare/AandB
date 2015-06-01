@@ -35,7 +35,6 @@ LocationHelper.prototype.calculateNewPathStep = function(args) { // test with ja
 		maxTotalBearingVariationDegrees: args.maxTotalBearingVariationDegrees,
 		magnitude: args.magnitude
 	})
-	console.log(newVector)
 	var newCoords = this.calculateCoordsFromNewVector({
 		currentCoords: args.currentPath.coords,
 		vector: newVector
@@ -50,8 +49,6 @@ LocationHelper.prototype.calculateNewVector = function(args) { // test with jasm
 	var newBearingDegrees = args.currentVector.verticalAngleDeg() +
 		((Math.random() * args.maxTotalBearingVariationDegrees) -
 			(args.maxTotalBearingVariationDegrees / 2));
-		console.log(args.currentVector.verticalAngleDeg());
-		console.log(newBearingDegrees);
 	var vectorXNew = args.magnitude * Math.sin(this.toRadians(newBearingDegrees));
 	var vectorYNew = args.magnitude * Math.cos(this.toRadians(newBearingDegrees));
 	return new Victor(vectorXNew, vectorYNew);
