@@ -1,7 +1,7 @@
 'use strict';
 var locationHelper = new LocationHelper(); // "required"
 
-smoothMove.call(B.prototype); // () adds smoothMove as a mixin to B
+SmoothMovementExtension.call(B.prototype); // () adds smoothMove as a mixin to B
 
 function B(args) {
 	// Properties set externally
@@ -23,6 +23,8 @@ function B(args) {
 	// Launch initial actions
 	this.calculateInitialProperties()
 	this.born();
+	// this.emmit(new, klass='b', id=this.id)
+	// // // // this.viewModel = new React.Component B // creates view-model (with sprite)
 }
 
 B.prototype.calculateInitialProperties = function() {
@@ -35,36 +37,13 @@ B.prototype.calculateInitialProperties = function() {
 		},
 		vector: new Victor(0, - (this.pathStep)) //backwards-pointing vector, randomise later
 	};
-	this.createDomElement();
-}
-
-B.prototype.createDomElement = function() {
-	this.$element = $('<div></div>');
-	this.$element.attr('id', this.id);
-	this.$element.addClass(this.klass);
-	this.$element.css({
-		width: this.diameter + 'px',
-		height: this.diameter + 'px',
-		top: this.path.currentCoords.y + 'px',
-		left: this.path.currentCoords.x + 'px'
-	});	
 }
 
 B.prototype.reactionsToB = function(proximity) {
 		// console.log(proximity)
 	if (proximity < 10) {
-		this.moveAbout() // Remove into react later!!!!!!!!!!!!!!!!!!!
+		this.smoothMovement() // Remove into react later!!!!!!!!!!!!!!!!!!!
 	} // elseif (proximity > 10) {
-
-	// } // elseif (proximity > 10) {
-
-	// } // elseif (proximity > 10) {
-
-	// } // elseif (proximity > 10) {
-
-	// } // elseif (proximity > 10) {
-
-	// }
 }
 
 B.prototype.reactionsToWall = function(proximity) {
@@ -101,12 +80,12 @@ B.prototype.check = function() {
 	// console.log(entities)
 	// entities.pop(this)
 	// console.log(entities)
-	this.process(entities);
+	this.react(entities);
 };
 
 B.prototype.react = function(entities) { // superclass
 	for (var entity of entities) {
-		var proximity = locationHelper.proximity({
+		var proximity = locationHelper.calculateDistanceBetween({
 											subject: { coords: this.path.currentCoords, 		diameter: this.diameter },
 											object:  { coords: entity.path.currentCoords, 	diameter: entity.diameter }
 										});

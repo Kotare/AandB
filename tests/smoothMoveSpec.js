@@ -1,18 +1,16 @@
 var expect = chai.expect;
 
 describe("behavour/SmoothMove", function() {
-	var smoothMove;
-	var sandbox = sinon.sandbox.create();
 
 	beforeEach(function() {
-		smoothMove = new SmoothMove();
+		this.sandbox = sinon.sandbox.create();
 	})
 
 	afterEach(function() {
 		sandbox.restore()
 	})
 
-	describe("moveAbout", function() {
-		it("tells body to move to new position along same course within specified path variation")
+	describe("#smoothMovement()", function() {
+		it("publishes new position & orientation")
 	})
 })

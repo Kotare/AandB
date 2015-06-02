@@ -1,0 +1,9 @@
+// view model
+LocationHelper.prototype.coordsToTopLeftCoords = function(args) {
+	var xCoord = args.coords.x - args.entitySize.x / 2
+	var yCoord = args.coords.y - args.entitySize.y / 2
+	return {
+		x: xCoord,
+		y: yCoord
+	}
+}

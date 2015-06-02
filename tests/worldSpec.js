@@ -14,13 +14,13 @@ describe("World", function() {
 	})
 
 	describe("initialize", function() {
-		it("[change due] initializes entities & stores them in this.entities", function() {
+		it("!? initializes entities & stores them in this.entities", function() {
 			expect(this.world.entities[0]).to.eq(this.entity);
 			expect(this.world.entities[1]).to.eq(this.entity);
 		})
 	})
 
-	describe("is sensible - #sense()", function() {
+	describe("#sense()", function() {
 		it("returns all entities", function() {
 			var response = this.world.sense(0);
 			expect(response).to.include(this.entity)

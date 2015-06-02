@@ -1,5 +1,5 @@
-var expect = chai.expect,
-	locationHelperProximity = sinon.spy(LocationHelper.prototype, "proximity");
+var expect = chai.expect
+	// locationHelperProximity = sinon.spy(LocationHelper.prototype, "proximity");
 
 describe("B", function() {
 
@@ -28,8 +28,8 @@ describe("B", function() {
 	// 	b = new B(args);
 	})
 
-	describe("when created", function() {
-		it("it is displayed on page")
+	describe("#initialize (constructor)", function() {
+		it("calls WorldView.createViewModel (or publishes the fact of it's new existence?) Direct through channel, or via an intermediary 'worldView'")
 	})
 	describe("autonomous behaviour when", function() {
 		describe("far from all entities", function() {
