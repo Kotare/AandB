@@ -1,9 +1,6 @@
 'use strict';
 function World() {
-	this.$element = $('#world')
-	this.size = Math.max( $(window).height(), $(window).width() )
 	this.entities = this.initializeEntities();
-	this.renderEntities()
 }
 
 World.prototype.initializeEntities = function() {
@@ -23,15 +20,8 @@ World.prototype.initializeEntities = function() {
 	return initialEntities
 }
 
-World.prototype.renderEntities = function() {
-	for (var entity of this.entities) {
-		this.$element.append(entity.$element);
-	}
-}
-
 World.prototype.sense = function(id) {
-	// return $.grep(this.entities, function(e) {
-	// 	return e.id != id;
-	// });
-	return this.entities
+	return $.grep(this.entities, function(e) {
+		return e.id != id;
+	});
 }

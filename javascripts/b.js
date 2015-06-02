@@ -1,6 +1,4 @@
 'use strict';
-var locationHelper = new LocationHelper(); // "required"
-
 SmoothMovementExtension.call(B.prototype); // () adds smoothMove as a mixin to B
 
 function B(args) {
@@ -11,11 +9,11 @@ function B(args) {
 
 	// B class properties
 	this.klass = 'b';
-	this.diameterHeightPercent = 0.02; // superclass
-	this.pathStepPercent = 0.001;
+	this.diameter = 2; // superclass
+	this.pathStep = this.diameter/10;
 	this.maxTotalBearingVariationDegrees = 90; // MAX
 	this.reactions = {
-		'default': this.moveAbout.bind(this),
+		'default': this.makeSmoothMovement.bind(this),
 		// a: this.reactionsToA,
 		'b': this.reactionsToB.bind(this)
 	}
@@ -23,26 +21,26 @@ function B(args) {
 	// Launch initial actions
 	this.calculateInitialProperties()
 	this.born();
+	// WorldView.create(klass, id)
 	// this.emmit(new, klass='b', id=this.id)
 	// // // // this.viewModel = new React.Component B // creates view-model (with sprite)
 }
 
 B.prototype.calculateInitialProperties = function() {
-	this.diameter = this.diameterHeightPercent * this.world.size;
-	this.pathStep = this.pathStepPercent * this.world.size;
 	this.path = {
 		currentCoords: {
-			x: this.world.size * 0.5,
-			y: this.world.size * 0.5
+			x: 0,
+			y: 0
 		},
 		vector: new Victor(0, - (this.pathStep)) //backwards-pointing vector, randomise later
 	};
 }
 
 B.prototype.reactionsToB = function(proximity) {
-		// console.log(proximity)
+	console.log(this.id, proximity)
 	if (proximity < 10) {
-		this.smoothMovement() // Remove into react later!!!!!!!!!!!!!!!!!!!
+		// debugger
+		this.makeSmoothMovement() // Remove into react later!!!!!!!!!!!!!!!!!!!
 	} // elseif (proximity > 10) {
 }
 
@@ -85,7 +83,7 @@ B.prototype.check = function() {
 
 B.prototype.react = function(entities) { // superclass
 	for (var entity of entities) {
-		var proximity = locationHelper.calculateDistanceBetween({
+		var proximity = LocationHelper.calculateDistanceBetween({
 											subject: { coords: this.path.currentCoords, 		diameter: this.diameter },
 											object:  { coords: entity.path.currentCoords, 	diameter: entity.diameter }
 										});
