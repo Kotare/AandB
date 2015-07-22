@@ -1,7 +1,6 @@
 'use strict';
 
-
-var LocationHelper = {
+module.exports = {
 	
 	calculateDistanceBetween: function(args) {
 		var xDist = Math.abs(args.subject.coords.x - args.object.coords.x)

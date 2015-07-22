@@ -9,14 +9,16 @@ module.exports = React.createClass({
 	render: function() {
 		var numEntities = 2
 		var entities = []
-		var timeStep = {
+		var timeStepRange = {
 			max: 300,
 			min: 200
 		};
+		var size = 40
+		var pathStep = size / 10
 		for (var i = 1; i <= numEntities; i++) {
-			var timeStep = Math.random() * (timeStep.max - timeStep.min) + timeStep.min
+			var timeStep = Math.random() * (timeStepRange.max - timeStepRange.min) + timeStepRange.min
 			entities.push(
-				<B timeStep={timeStep} id={i}/>
+				<B timeStep={timeStep} id={i} size={size} pathStep={pathStep} />
 			)
 		}
 
