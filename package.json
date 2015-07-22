@@ -4,7 +4,7 @@
   "description": "1000 autonomous entities",
   "main": "index.js",
   "scripts": {
-    "start": "budo index.js:bundle.js --live",
+    "start": "budo index.js:bundle.js --live  --verbose --debug | garnish",
     "deploy": "gh-pages -d ."
   },
   "browserify": {

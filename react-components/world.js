@@ -1,6 +1,6 @@
 var React = require('react')
 
-var B = require('b')
+var B = require('./b')
 
 module.exports = React.createClass({
 	componentDidMount: function() {
