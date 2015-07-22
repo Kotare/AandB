@@ -28,7 +28,8 @@
   "dependencies": {
     "jquery": "^2.1.4",
     "react": "^0.13.3",
-    "reactify": "^1.1.1"
+    "reactify": "^1.1.1",
+    "victor": "^0.2.6"
   },
   "devDependencies": {
     "babelify": "^6.1.2",
