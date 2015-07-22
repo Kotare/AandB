@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>A&B tests</title>
+	<link rel="stylesheet" type="all" href="vendor/mocha.css">
+</head>
+<body>
+	<!-- testing libraries -->
+	<div id="mocha"><p><a href=".">Wooohooo Testing!</a></p></div>
+	<div id="messages"></div>
+	<div id="fixtures"></div>
+	<script src="vendor/mocha.js"></script>
+	<script src="vendor/chai.js"></script>
+	<script src="vendor/sinon-1.14.1.js"></script>
+
+	<!-- required libraries -->
+	<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+	<script src="lib/victor.min.js"></script>
+
+	<!-- code to test -->
+	<script src="javascripts/locationHelper.js"></script>
+	<script src="javascripts/smoothMove.js"></script>
+	<script src="javascripts/b.js"></script>
+	<script src="javascripts/world.js"></script>
+	
+	<script>mocha.setup('bdd')</script>
+	<script src="tests/worldSpec.js"></script>
+	<script src="tests/locationHelperSpec.js"></script>
+	<script src="tests/bSpec.js"></script>
+	<script src="tests/smoothMoveSpec.js"></script>
+	<script>mocha.run()</script>
+</body>
+</html>
