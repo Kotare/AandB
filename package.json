@@ -1,0 +1,40 @@
+{
+  "name": "AandB",
+  "version": "0.0.7",
+  "description": "1000 autonomous entities",
+  "main": "index.js",
+  "scripts": {
+    "start": "budo index.js:bundle.js --live",
+    "deploy": "gh-pages -d ."
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kotare/AandB"
+  },
+  "author": [
+    "iainkirkpatrick",
+    "peterjacobson"
+  ],
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Kotare/AandB/issues"
+  },
+  "homepage": "https://github.com/Kotare/AandB",
+  "dependencies": {
+    "jquery": "^2.1.4",
+    "react": "^0.13.3",
+    "reactify": "^1.1.1"
+  },
+  "devDependencies": {
+    "babelify": "^6.1.2",
+    "browserify": "^9.0.7",
+    "budo": "^2.1.3",
+    "gh-pages": "^0.3.0",
+    "watchify": "^3.1.0"
+  }
+}
