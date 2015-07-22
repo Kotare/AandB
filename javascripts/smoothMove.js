@@ -3,20 +3,17 @@
 // calculate next position
 // tell view model to update to there.
 
-function SmoothMovementExtension() {
-
-	this.makeSmoothMovement = function() {
+module.exports = {
+	makeSmoothMovement: function() {
 		this.calculateNewPathStep()
 		// this.emit(this.path.coords, this.path.vector.verticalAngleDeg())
-	}
-
-	this.calculateNewPathStep = function() { // test with jasmine spies (~ mocks/doubles) on Math.random()!
+	},
+	calculateNewPathStep: function() { // test with jasmine spies (~ mocks/doubles) on Math.random()!
 		this.path.vector = this.calculateNewVector();
 		this.path.currentCoords = this.calculateCoords(this.path.vector);
 		// this.viewModel.updatePosition(this.path.coords);
-	}
-
-	this.calculateNewVector = function() { // test with jasmine spies (~ mocks/doubles) on Math.random()!
+	},
+	calculateNewVector: function() { // test with jasmine spies (~ mocks/doubles) on Math.random()!
 			// var distanceToMove = this.path.vector.magnitude();
 		var newBearingDegrees = this.path.vector.verticalAngleDeg() +
 			((Math.random() * this.maxTotalBearingVariationDegrees) -
@@ -24,9 +21,8 @@ function SmoothMovementExtension() {
 		var vectorXNew = this.pathStep * Math.sin(LocationHelper.toRadians(newBearingDegrees));
 		var vectorYNew = this.pathStep * Math.cos(LocationHelper.toRadians(newBearingDegrees));
 		return new Victor(vectorXNew, vectorYNew);
-	}
-
-	this.calculateCoords = function() {
+	},
+	calculateCoords: function() {
 		// vector coordinate system points up and right,
 		// dom coordinate system points down and right
 		var xNew = this.path.currentCoords.x - this.path.vector.x;
